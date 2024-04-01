@@ -1,4 +1,4 @@
-INSERT INTO Alias (Alias_ID, Criminal_ID, Alias)
+INSERT INTO Aliases (Alias_ID, Criminal_ID, Alias)
 VALUES (298492, 382764, 'Big Jake'),
        (003631, 052523, 'Sprite'),
        (725517, 538982, 'Gunner'),
