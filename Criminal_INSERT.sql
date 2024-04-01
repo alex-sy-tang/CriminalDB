@@ -145,7 +145,7 @@ INSERT INTO Sentencing(Sentencing_ID, Crimes_ID, Setence_type, Prob_ID, Start_da
 VALUES (100011, 465946632, 'J', 88888, '2024-12-31', '2025-10-16', 2);
 
 -- Prob_officer
-INSERT INTO Prob_officer(Prob_ID, Last_name, First_name, Street, City, State, 
+INSERT INTO Prob_officer(Prob_ID, Last_name, First_name, Street, City, State_US, 
        Zip, Phone_number, Email, Status)
 VALUES 
        (11111, 'Smith', 'John', '123 Main St', 'Anytown', 'NY', '12345', '5551234567', 'john.smith@example.com', 'A'),
