@@ -4,11 +4,11 @@ CREATE TABLE Criminals (
   First_name varchar(10),
   Street varchar(30),
   City varchar(20),
-  State CHAR(2),
+  State_US CHAR(2),
   Zip CHAR(5),
   phone_number CHAR(10),
-  violent_offender_status CHAR(1) DEFAULT 'N',
-  probation_status CHAR(1) DEFAULT 'N',
+  V_status CHAR(1) DEFAULT 'N',
+  P_status CHAR(1) DEFAULT 'N',
 
   PRIMARY KEY (Criminal_ID)
 );
