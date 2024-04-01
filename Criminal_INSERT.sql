@@ -60,7 +60,7 @@ VALUES (465946624, 32662492),
        (465946633, 32662501); 
 
 
-INSERT INTO Officers (Officer_ID, Last, First, Precinct, Badge, Phone, Status)
+INSERT INTO Officers (Officer_ID, Last_name, First_name, Precinct, Badge, Phone, Status)
 VALUES (32662492, 'Wang', 'Toby', 'ILMH', 'GRWJHCITDRGDQI', '555-9876','A'), 
        (32662493, 'Smith', 'Emily', 'ILMH', 'GRWJHCITDRGDQI', '555-1234', 'A'),
        (32662494, 'Johnson', 'David', 'ILMH', 'GRWJHCITDRGDQI', '555-5678', 'A'),
