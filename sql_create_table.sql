@@ -37,16 +37,6 @@ CREATE TABLE Appeals (
     PRIMARY KEY Appeal_ID,
     FOREIGN KEY Crime_ID REFERENCES Crimes(Crime_ID));
 
-CREATE TABLE Appeals (
-    Appeal_ID INT(5),
-    Crime_ID INT(9, 0),
-    Filing_date DATE,
-    Hearing_date DATE,
-    Status CHAR(1) DEFAULT(P),
-    PRIMARY KEY Appeal_ID,
-    FOREIGN KEY Crime_ID REFERENCES Crimes Crime_ID);
-
-
 CREATE TABLE Crime_codes (
     Crime_code INT(3, 0) NOT NULL,
     Code_description VARCHAR(30) NOT NULL UNIQUE,
