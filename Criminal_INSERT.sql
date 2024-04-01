@@ -1,16 +1,16 @@
-INSERT INTO Alias (Alias_ID, Criminal_ID, Alias)
+INSERT INTO Aliases (Alias_ID, Criminal_ID, Alias)
 VALUES (298492, 382764, 'Big Jake'),
        (003631, 052523, 'Sprite'),
        (725517, 538982, 'Gunner'),
        (127383, 210735, 'Lil K'),
        (435769, 261552, 'Jesus'),
        (127486, 527184, 'KJ'),
-       (048731, 637237, 'Dawg'),
-       (255274, 578629, 'Spice'),
+       (048731, 637237, 'Dawg')
+       (255274, 578629, 'Spice')
        (269385, 811248, 'JD'),
        (513894, 342378, 'Monster');
 
-INSERT INTO Criminals (Criminal_ID, Last, First, Street, City, State, Zip, Phone, V_status, P_status)
+INSERT INTO Criminals (Criminal_ID, Last_name, First_name, Street, City, State_US, Zip, Phone, V_status, P_status)
 VALUES (382764, 'Burke', 'Jake', '872 Stetson Ave', 'Palo Alto', 'CA', '28746', '5109873772', 'N', 'N'),
        (052523, 'Mckinney', 'Michael', '1028 Matte St', 'Taccoa', 'GA', '56280', '8167239091', 'N', 'N'),
        (538982, 'Stone', 'Trevon', '97 Fulton Ave', 'Jackson', 'MS', '90626', '9532458983', 'N', 'N'),
@@ -22,7 +22,7 @@ VALUES (382764, 'Burke', 'Jake', '872 Stetson Ave', 'Palo Alto', 'CA', '28746', 
        (811248, 'Palmer', 'Jarvis', '90126 Lowe Rd', 'Denver', 'CO', '53008', '4529854801', 'N', 'N'),
        (342378, 'Whitaker', 'Derrick', '1408 Decker', 'New York', 'NY', '10036', '9172895230', 'N', 'N');
 
-INSERT INTO Crimes (Crime_ID, Criminal_ID, Classification, Date_charged, Status, Hearing_date, Appeal_cut_date)
+INSERT INTO Crimes (Crimes_ID, Criminal_ID, Classification, Date_charged, Status, Hearing_date, Appeal_cut_date)
 VALUES (534687156, 382764, 'U', '2022-08-23', 'CL', '2023-07-19', '2023-08-19'),
        (582375231, 052523, 'U', '2021-12-19', 'CA', '2022-05-20', '2022-06-20'),
        (147289047, 538982, 'U', '2022-10-04', 'IA', '2023-10-24', '2023-11-24'),
@@ -32,7 +32,7 @@ VALUES (534687156, 382764, 'U', '2022-08-23', 'CL', '2023-07-19', '2023-08-19'),
        (473902517, 637237, 'U', '2021-01-01', 'CA', '2021-09-29', '2021-10-29'),
        (109293744, 578629, 'U', '2021-02-05', 'IA', '2021-10-07', '2021-11-07'),
        (936410853, 811248, 'U', '2022-06-12', 'CL', '2023-05-21', '2023-06-21'),
-       (157809343, 342378, 'U', '2022-05-15', 'CA', '2022-12-18', '2023-01-18'); 
+       (157809343, 342378, 'U', '2022-05-15', 'CA', '2022-12-18', '2023-01-18');
 
 INSERT INTO Crime_charges (Charge_ID, Crime_ID, Crime_code, Charge_status, Fine_amount, Court_fee, Amount_paid, Pay_due_date)
 VALUES (2300239352, 465946624, 215, 'PD', 00000.00, 00000.00, 00000.00, '2000-01-01'), --how can we have crime charges if the status is Pending
@@ -97,3 +97,65 @@ VALUES (215, "Petty theft of personal property."),
        (521, "Assault with a deadly weapon other than a firearm."),
        (978, "Possession of a controlled substance for sale."),
        (243, "Battery resulting in serious bodily injury.");
+
+
+-- Sentencing
+INSERT INTO Sentencing(Sentencing_ID, Crimes_ID, Setence_type, Prob_ID, Start_date, 
+       End_date, Number_of_violations)
+VALUES (100001, , 'J', 11111, '2024-03-01', '2024-04-01', 2);
+
+INSERT INTO Sentencing(Sentencing_ID, Crimes_ID, Setence_type, Prob_ID, Start_date, 
+       End_date, Number_of_violations)
+VALUES (100002, , 'J', 11111, '2024-03-15', '2024-04-028', 2);
+
+INSERT INTO Sentencing(Sentencing_ID, Crimes_ID, Setence_type, Prob_ID, Start_date, 
+       End_date, Number_of_violations)
+VALUES (100003, , 'H', 22222, '2024-03-21', '2024-04-01', 1);
+
+INSERT INTO Sentencing(Sentencing_ID, Crimes_ID, Setence_type, Prob_ID, Start_date, 
+       End_date, Number_of_violations)
+VALUES (100004, , 'H', 99999, '2023-03-01', '2023-05-01', 1);
+
+INSERT INTO Sentencing(Sentencing_ID, Crimes_ID, Setence_type, Prob_ID, Start_date, 
+       End_date, Number_of_violations)
+VALUES (100005, , 'P', 44444, '2024-02-01', '2024-03-11', 1);
+
+INSERT INTO Sentencing(Sentencing_ID, Crimes_ID, Setence_type, Prob_ID, Start_date, 
+       End_date, Number_of_violations)
+VALUES (100006, , 'J', 55555, '2023-02-01', '2024-03-18', 2);
+
+INSERT INTO Sentencing(Sentencing_ID, Crimes_ID, Setence_type, Prob_ID, Start_date, 
+       End_date, Number_of_violations)
+VALUES (100007, , 'J', 55555, '2024-03-18', '2024-09-18', 2);
+
+INSERT INTO Sentencing(Sentencing_ID, Crimes_ID, Setence_type, Prob_ID, Start_date, 
+       End_date, Number_of_violations)
+VALUES (100008, , 'H', 66666, '2023-08-01', '2024-01-01', 1);
+
+INSERT INTO Sentencing(Sentencing_ID, Crimes_ID, Setence_type, Prob_ID, Start_date, 
+       End_date, Number_of_violations)
+VALUES (100009, , 'P', 77777, '2024-01-01', '2024-03-31', 1);
+
+INSERT INTO Sentencing(Sentencing_ID, Crimes_ID, Setence_type, Prob_ID, Start_date, 
+       End_date, Number_of_violations)
+VALUES (100010, , 'H', 88888, '2024-04-01', '2024-12-31', 2);
+
+INSERT INTO Sentencing(Sentencing_ID, Crimes_ID, Setence_type, Prob_ID, Start_date, 
+       End_date, Number_of_violations)
+VALUES (100011, , 'J', 88888, '2024-12-31', '2025-10-16', 2);
+
+-- Prob_officer
+INSERT INTO Prob_officer(Prob_ID, Last_name, First_name, Street, City, State, 
+       Zip, Phone_number, Email, Status)
+VALUES 
+       (11111, 'Smith', 'John', '123 Main St', 'Anytown', 'NY', '12345', '5551234567', 'john.smith@example.com', 'A'),
+       (22222, 'Doe', 'Jane', '456 Elm St Apt 3B', 'Smallville', 'CA', '98765', '5559876543', 'jane.doe@example.com', 'A'),
+       (33333, 'Johnson', 'Michael', '789 Oak St', 'Riverside', 'TX', '54321', '5555555555', 'michael.johnson@example.com', 'I'),
+       (44444, 'Williams', 'Emily', '101 Cedar St', 'Portland', 'OR', '12345', '5552223333', 'emily.williams@example.com', 'A'),
+       (55555, 'Brown', 'David', '321 Pine St', 'Springfield', 'IL', '67890', '5554445555', 'david.brown@example.com', 'A'),
+       (66666, 'Martinez', 'Maria', '444 Birch St', 'Miami', 'FL', '54321', '5557778888', 'maria.martinez@example.com', 'A'),
+       (77777, 'Gonzalez-Martinez', 'Carlos', '777 Maple St', 'Denver', 'CO', '98765', '5556667777', 'carlos.gonzalez@example.com', 'A'),
+       (88888, 'Lopez', 'Ana', '888 Pine St', 'Tucson', 'AZ', '87654', '5558889999', 'ana.lopez@example.com', 'A'),
+       (99999, 'Hernandez', 'Jose', '999 Oak St', 'Phoenix', 'AZ', '54321', '5551112222', 'jose.hernandez@example.com', 'A'),
+       (13131, 'Garcia', 'Luis', '111 Elm St', 'Albuquerque', 'NM', '98765', '5553334444', 'luis.garcia@example.com', 'A');     
+
