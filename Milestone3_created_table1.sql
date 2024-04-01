@@ -31,7 +31,7 @@ CREATE TABLE Crimes (
   Appeal_cut_date DATE,
 
   CONSTRAINT check_hearing_date
-    CHECK (CHECK Hearing_date > Date_charged),
+    CHECK (Hearing_date > Date_charged),
 
   PRIMARY KEY(Crimes_ID, Criminal_ID)  
 );
