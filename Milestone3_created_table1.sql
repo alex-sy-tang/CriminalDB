@@ -54,7 +54,7 @@ CREATE TABLE Prob_officer(
 CREATE TABLE Sentencing(
     Sentencing_ID INT, 
     Crimes_ID INT REFERENCES Crimes(Crimes_ID),
-    Setence_type CHAR(1),
+    Sentence_type CHAR(1),
     Prob_ID INT REFERENCES Prob_officer(Prob_ID),
     Start_date DATE,
     End_date DATE,
