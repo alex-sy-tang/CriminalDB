@@ -1,34 +1,15 @@
--- Update the number of violation for a criminal, 
+-- Update the number of Sentence, 
 -- when a new sentencing is initiated
 
-DELIMITER @@
-CREATE OR REPLACE TRIGGER updateViolations
+DELIMITER //
+CREATE OR REPLACE TRIGGER updateSentence
 AFTER INSERT ON Sentencing 
 FOR EACH ROW
-    BEGIN 
-        IF NEW.Sentencing_ID IS NOT NULL THEN
-            UPDATE Sentencing
-            SET Number_of_violations = Number_of_violations + 1
-            WHERE Crimes_ID = NEW.Crimes_ID;
-        END IF;
-    END @@
-DELIMITER ; 
+BEGIN 
+	IF NEW.Sentencing_ID IS NOT NULL THEN
+            UPDATE num_sentences
+            SET sentences_num = sentences_num + 1;
+    END IF;
+END // 
+DELIMITER ;
 
-
-
-
--- Change the fine amount and court fee when the Charge_Status changed
-DELIMITER @@
-CREATE OR REPLACE TRIGGER updateFine
-AFTER UPDATE ON Crime_charges
-FOR EACH ROW 
-    BEGIN
-        UPDATE Crime_charges
-        SET Fine_amount = 50000
-        WHERE Charge_Status = 'GL'; 
-
-        UPDATE Crime_charges
-        SET Court_fee = 20000
-        WHERE Charge_status = 'GL'; 
-    END @@
-DELIMITER ; 
