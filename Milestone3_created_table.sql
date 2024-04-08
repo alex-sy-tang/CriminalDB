@@ -79,6 +79,8 @@ CREATE TABLE Crime_charges (
     Court_fee DECIMAL(10, 2),
     Amount_paid DECIMAL(10, 2),
     Pay_due_date DATE,
+    CONSTRAINT check_overpaid CHECK (Amount_paid <= Fine_amount + Court_fee),
+
     PRIMARY KEY (Charge_ID, Crimes_ID, Crime_code));
 
 CREATE TABLE Officers (
