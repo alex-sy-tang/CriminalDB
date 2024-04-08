@@ -105,3 +105,7 @@ CREATE TABLE Appeals (
     Hearing_date DATE,
     Status_ CHAR(1) DEFAULT 'P',
     PRIMARY KEY (Appeal_ID, Crimes_ID));
+
+CREATE TABLE num_sentences(
+      sentences_num NUMERIC (4)
+);
