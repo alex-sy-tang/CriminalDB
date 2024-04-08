@@ -16,6 +16,6 @@ Task | Due Date
 | Milestone3 | April 07 11:59pm 
 | UI DESIGN | April 10th 4:00pm
 | HTML & CSS | April 14th 11:59pm
-| Backend, Security, and Transaction Management | April 21 11:59pm
+| Backend, Security, and Transaction Management | April 20 11:59pm
 | Milestone4 | April 21 11:59pm
 | Milestone5 | April 22 11:59pm
