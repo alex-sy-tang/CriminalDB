@@ -9,11 +9,10 @@ FOR EACH ROW
         IF NEW.Sentencing_ID IS NOT NULL THEN
             UPDATE Sentencing
             SET Number_of_violations = Number_of_violations + 1
-            WHERE Criminal_ID = NEW.Criminal_ID;
+            WHERE Crimes_ID = NEW.Crimes_ID;
         END IF;
-    END; 
-END @@
-DELIMITER; 
+    END @@
+DELIMITER ; 
 
 
 
@@ -32,4 +31,4 @@ FOR EACH ROW
         SET Court_fee = 20000
         WHERE Charge_status = 'GL'; 
     END @@
-DELIMITER; 
+DELIMITER ; 
