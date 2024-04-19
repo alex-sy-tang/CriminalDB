@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include "connect.php";
 include "user.php";
 
@@ -14,8 +16,14 @@ $row = mysqli_fetch_assoc($result);
 $user = User::addUser($row);
 
     if ($user->login($un, $pass)) {
-        header("Location: buttons.html");
+        if($user->isDevelop()){
+        header("Location: buttons_developer.html"); // for developer. 
         exit();
+        }else{
+        header("Location: search.php"); // for user only
+        exit();
+        }
+
         }
 
 // if($row['username'] === $un && password_verify($pass, $row['password'])){
@@ -23,11 +31,11 @@ $user = User::addUser($row);
 //     header("Location: buttons.html");
 //     exit;}
         else{
-            header("Location: login.html?error=incorrect username or password");
+            header("Location: login_fail.html");
             exit();
         }   
     }else{
-        header("Location: login.html?error=incorrect username or password");
+        header("Location: login_fail.html");
         exit();
 }
 ?>
