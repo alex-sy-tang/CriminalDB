@@ -6,7 +6,7 @@ $password = '';
 $database = 'jail';
 
 $servername = 'localhost:80';
-$mysqli = new mysqli($serverame, $user, $password, $database);
+$mysqli = new mysqli($servername, $user, $password, $database);
 
 if ($mysqli -> connect_error) {
 	die('Connect Error (' .
