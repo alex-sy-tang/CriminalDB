@@ -6,7 +6,7 @@ $password = '';
 $database = 'jail';
 
 $servername = 'localhost:80';
-$mysqli = new mysqli($serverame, $user, $password, $database);
+$mysqli = new mysqli($servername, $user, $password, $database);
 
 if ($mysqli -> connect_error) {
 	die('Connect Error (' .
@@ -23,7 +23,7 @@ $mysqli->close();
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel = "stylesheet" href = "styles/style.css">
+	<link rel = "stylesheet" href = "../styles/style.css">
 	
 </head>
 <body>
@@ -32,7 +32,7 @@ $mysqli->close();
       		<h1>CRIMINAL DATABASE</h1>
     	</div>
     	<ul>
-     		 <li><a href="#" class="login">Login</a></li>
+     		 <li><a href="../login.html" class="login">Login</a></li>
     	</ul>
 	 </nav>
 	<div class="table_content">
