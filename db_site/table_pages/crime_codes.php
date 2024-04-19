@@ -23,7 +23,7 @@ $mysqli->close();
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel = "stylesheet" href = "styles/style.css">
+	<link rel = "stylesheet" href = "../styles/style.css">
 	
 </head>
 <body>
@@ -38,7 +38,7 @@ $mysqli->close();
       		</form>
     	</div>
     	<ul>
-     		 <li><a href="#" class="login">Login</a></li>
+     		 <li><a href="../login.html" class="login">Login</a></li>
     	</ul>
 	 </nav>
 	<div class="table_content">
