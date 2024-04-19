@@ -14,6 +14,7 @@ class User {
         $user->password = $new['password'];
         $user->firstname = $new['firstname'];
         $user->lastname = $new['lastname'];
+        $user->isPolice = $new['isPolice'];
         $user->isDeveloper = $new['isDeveloper'];
 
         return $user;
@@ -39,12 +40,12 @@ class User {
         }
     }
     
-    // public static function checkPerm() {
-    //     $user = unserialize($_SESSION['user']);
-    //     if ($user->isDevelop() == false) {
-    //         die ('No permission to do this operation! <a href="criminal.php"> go back </a>');
-    //     }
-    // }
+    public static function checkPerm() {
+        $user = unserialize($_SESSION['user']);
+        if ($user->isPolice() == false) {
+            die ('No permission to access! <a href="crimes.php"> go back </a>');
+        }
+    }
 
     public static function isLogined() {
         return (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] !== true);
