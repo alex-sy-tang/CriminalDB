@@ -1,1 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Gray Navigation Bar</title>
+  <style>
+    nav {
+      background-color: #3a3a3a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.7% 21%;
+      font-family: "Helvetica";
+    }
+    h3 {
+    	margin: 0; /* Remove default body margin */
+      display: flex; /* Make body a flex container */
+      justify-content: center; /* Center content horizontally */
+      align-items: center; /* Center content vertically (optional) */
+      margin: 26px;
+    }
+    
+    body {
+    	margin: 0px;
+      font-family: "Helvetica";
+      justify-content: center;
+      align-items: center;
+    }
 
+    .logo h1 {
+      margin: 0;
+      font-weight: bold;
+      color: #FFFFFF;
+    }
+    
+    .buttons a {
+        padding: 13px 20px;
+        width: 20%;
+        border-radius: 8px;
+        text-align: center;
+        margin-left: 500px;
+        background-color: #EDEDED;
+        margin-bottom: 10px;
+    }
+    
+    ul li a {
+		    display: inline-block;
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        display: inline-block;
+        margin-left: 20px;
+      
+    }
+    
+    .login {
+    	  color: #FF9051;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-bar form {
+      position: relative;
+    }
+
+    .search-bar input[type="text"] {
+      padding: 5px 10px;
+      border: 0px;
+      border-radius: 5px;
+      font-size: 16px;
+      background-color: #4f4f4f
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <h1>CRIMINAL DATABASE</h1>
+    </div>
+    
+    <div class="search-bar">
+      <form action="#">
+        <input type="text" placeholder="Search">
+      </form>
+    </div>
+    
+    <ul>
+      <li><a href="#" class="login">Login</a></li>
+    </ul>
+  </nav>
+  <h3>Select data to view</h3>
+  <div class="buttons">
+  <ul>
+    <li><a href="aliases.php" style="color: black">Aliases</a></li>
+    <li><a href="criminals.php" style="color: black">Criminals</a></li>
+    <li><a href="crimes.php" style="color: black">Crimes</a></li>
+    <li><a href="sentences.php" style="color: black">Sentences</a></li>
+    <li><a href="crime_charges.php" style="color: black">Crime charges</a></li>
+    <li><a href="officers.php" style="color: black">Officers</a></li>
+    <li><a href="appeals.php" style="color: black">Appeals</a></li>
+    <li><a href="crime_codes.php" style="color: black">Crime codes</a></li>
+    <li><a href="probation_officers.php" style="color: black">Probation officers</a></li>
+    <li><a href="crime_officers.php" style="color: black">Crime officers</a></li>
+  </ul>
+  </div>
+</body>
+</html>
