@@ -10,32 +10,36 @@ $username = $_POST['uname'];
 $password = $_POST['pwd'];
 //hash password stored in the user table
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-$isDeveloper = $_POST['dep'];
+$isPolice = $_POST['police'];
 
 //echo $hashed_password;
 
 
 // preparing and executing statment
-$sql = "INSERT INTO users(firstname, lastname, username, password, isDeveloper)
-values('$firstname','$lastname','$username', '$hashed_password', '$isDeveloper')";
+$sql = "INSERT INTO users(firstname, lastname, username, password, isPolice)
+values('$firstname','$lastname','$username', '$hashed_password', '$isPolice')";
 $result = mysqli_query($conn, $sql);
 if($result){
 echo $firstname. " is registred succesfully!";
+//Grant privilege
+if ($isDeveloper === 1) {
+    $right = "GRANT Developer to $username WITH GRANT OPTION";
+    mysqli_query($conn, $right);
+}
+else if ($isDeveloper === 0) {
+    $right = "GRANT Viewer to $username";
+    mysqli_query($conn, $right);
+}
+
+
 header("Location: login.html");
+exit;
 }else{
     echo $firstname. " is fail to register!";
     exit();
 
 }
 
-if ($isDeveloper === 1) {
-    $right = "$username will have Developer's privilege";
-    mysqli_query($conn, $right);
-}
-else if ($isDeveloper === 0) {
-    $right = "$username will have User's privilege";
-    mysqli_query($conn, $right);
-}
 
 $conn->close();
 ?>
