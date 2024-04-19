@@ -1,22 +1,23 @@
 <?php
 
-$user = 'root';
-$password = '';
+// $user = 'root';
+// $password = '';
 
-$database = 'jail';
+// $database = 'jail';
 
-$servername = 'localhost:80';
-$mysqli = new mysqli($servername, $user, $password, $database);
+// $servername = 'localhost:80';
+// $mysqli = new mysqli($servername, $user, $password, $database);
 
-if ($mysqli -> connect_error) {
-	die('Connect Error (' .
-	$mysqli->connect_errno . ') '.
-	$mysqli->connect_error);
-}
+// if ($mysqli -> connect_error) {
+// 	die('Connect Error (' .
+// 	$mysqli->connect_errno . ') '.
+// 	$mysqli->connect_error);
+// }
+include "../connect.php";
 
 $sql = " SELECT * FROM Crime_officers ";
-$result = $mysqli->query($sql);
-$mysqli->close();
+$result = $conn->query($sql);
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html>
