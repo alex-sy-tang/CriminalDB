@@ -6,7 +6,7 @@ $password = '';
 $database = 'jail';
 
 $servername = 'localhost:80';
-$mysqli = new mysqli($serverame, $user, $password, $database);
+$mysqli = new mysqli($servername, $user, $password, $database);
 
 if ($mysqli -> connect_error) {
 	die('Connect Error (' .
@@ -38,7 +38,7 @@ $mysqli->close();
       		</form>
     	</div>
     	<ul>
-     		 <li><a href="#" class="login">Login</a></li>
+     		 <li><a href="login.html" class="login">Login</a></li>
     	</ul>
 	 </nav>
 	<div class="table_content">
