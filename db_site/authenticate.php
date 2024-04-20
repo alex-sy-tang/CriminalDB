@@ -17,7 +17,7 @@ $user = User::addUser($row);
 
     if ($user->login($un, $pass)) {
         if($user->isDevelop()){
-        header("Location: buttons_developer.html"); // for developer. 
+        header("Location: buttons_developer.php"); // for developer. 
         exit();
         }else{
         header("Location: search.php"); // for user only
