@@ -1,29 +1,23 @@
 <?php
+session_start();
+include "../connect.php";
 
-$user = 'root';
-$password = '';
-
-$database = 'jail';
-
-$servername = 'localhost:80';
-$mysqli = new mysqli($servername, $user, $password, $database);
-
-if ($mysqli -> connect_error) {
-	die('Connect Error (' .
-	$mysqli->connect_errno . ') '.
-	$mysqli->connect_error);
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+  // User is not logged in, redirect to login page
+  header('Location: login.html');
+  exit;
 }
 
 $sql = " SELECT * FROM Officers ";
-$result = $mysqli->query($sql);
-$mysqli->close();
+$result = $conn->query($sql);
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel = "stylesheet" href = "styles/style.css">
+	<link rel = "stylesheet" href = "../styles/style.css">
 	
 </head>
 <body>
@@ -38,8 +32,8 @@ $mysqli->close();
       		</form>
     	</div>
     	<ul>
-     		 <li><a href="login.html" class="login">Login</a></li>
-    	</ul>
+			<li><a href="../logout.php" class="login">Logout</a></li>
+	</ul>
 	 </nav>
 	<div class="table_content">
 		<div class="table header">

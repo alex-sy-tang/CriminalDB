@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel = "stylesheet" href = "style.css">
+	<link rel = "stylesheet" href = "../styles/style.css">
 	
 </head>
 <body>
@@ -21,8 +21,8 @@
       		</form>
     	</div>
     	<ul>
-     		 <li><a href="#" class="login">Login</a></li>
-    	</ul>
+			<li><a href="../logout.php" class="login">Logout</a></li>
+	</ul>
 	 </nav>
 	<div id="Content">
 		<div class="table header">
@@ -46,7 +46,7 @@
 				</thead>
 				<tbody>
 					<?php
-						include 'connect.php';
+						include '../connect.php';
 						mysqli_query($conn, "LOCK TABLES Criminals READ");
 						$sql = "SELECT * FROM Criminals"; 
 

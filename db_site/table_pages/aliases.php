@@ -1,21 +1,19 @@
 <?php
+session_start();
 include "../connect.php";
 
-$sql = " SELECT * FROM Crime_officers ";
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+  // User is not logged in, redirect to login page
+  header('Location: login.html');
+  exit;
+}
+
+$sql = " SELECT * FROM Aliases ";
 $result = $conn->query($sql);
 $conn->close();
 ?>
 
-if ($mysqli -> connect_error) {
-	die('Connect Error (' .
-	$mysqli->connect_errno . ') '.
-	$mysqli->connect_error);
-}
-
-$sql = " SELECT * FROM Aliases ";
-$result = $mysqli->query($sql);
-$mysqli->close();
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +28,7 @@ $mysqli->close();
       		<h1>CRIMINAL DATABASE</h1>
     	</div>
     	<ul>
-     		 <li><a href="../login.html" class="login">Login</a></li>
+			<li><a href="../logout.php" class="login">Logout</a></li>
     	</ul>
 	 </nav>
 	<div id="table_content">
