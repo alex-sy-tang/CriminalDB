@@ -1,12 +1,10 @@
 <?php
+include "../connect.php";
 
-$user = 'root';
-$password = '';
-
-$database = 'jail';
-
-$servername = 'localhost:80';
-$mysqli = new mysqli($servername, $user, $password, $database);
+$sql = " SELECT * FROM Crime_officers ";
+$result = $conn->query($sql);
+$conn->close();
+?>
 
 if ($mysqli -> connect_error) {
 	die('Connect Error (' .
