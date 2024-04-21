@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 session_start();
 include "../connect.php";
@@ -9,7 +9,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
   exit;
 }
 
-?>
+?> 
 
 <!DOCTYPE html>
 <html>
@@ -28,7 +28,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     
     	<div class="search-bar">
       		<form action="../functions/criminal_totalcharge.php" method = "GET">
-        		<input type="text" name = "search_query" placeholder="Criminal Charge">
+        		<input type="text" name = "search_by_id" placeholder="Criminal Charge">
 				<button type = "submit">Search</button>
       		</form>
     	</div>
@@ -46,7 +46,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 		<!--<div class="table header"> -->
 			<h1>Criminals</h1>
 		<!--</div>-->
-		<a class = "btn btn-primary" href ="..//functions/criminals_add.php" role = "button"> Add </a>
+		<a class = "btn btn-primary" href ="..//functions/criminal_add.php" role = "button"> Add </a>
 		<div class = "table holder">
 			<table class="table">
 				<thead>
@@ -68,30 +68,53 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 						include_once '../connect.php';
 						mysqli_query($conn, "LOCK TABLES Criminals READ");
 						$sql = "SELECT * FROM Criminals"; 
-						$result = $conn ->query($sql);
-						if (!result){
-							die("invalid query: " . $conn -> error);
+						$params = [];
+						$types = '';
+
+						if($_SERVER["REQUEST_METHOD"] == "GET"){
+							if(!empty($_GET["search_by_id"])){
+								$sql .= "WHERE Alias_ID = ?";
+								$params[] = $_GET['search_by_id'];
+								$types .= 'i';
+							}
+						}
+
+						$stmt = $conn -> prepare($sql);
+						if($params){
+							$stmt -> bind_param($types, ...$params);
+						}
+
+						$stmt -> execute(); 
+
+
+						$result = $stmt -> get_result(); 
+
+						if (!$result){
+							die("Invalid query: " . $conn -> error);
 						}
 						while ($row = $result -> fetch_assoc()){
 							echo"
 							<tr>
-								<td>".$rows["Criminal_ID"]."</td>
-									<td>".$rows["Last"]."</td>
-									<td>".$rows["First"]."</td>
-                                    <td>".$rows["Street"]."</td>
-                                    <td>".$rows["City"]."</td>
-                                    <td>".$rows["State"]."</td>
-                                    <td>".$rows["Zip"]."</td>
-                                    <td>".$rows["Phone"]."</td>
-                                    <td>".$rows["V_status"]."</td>
-                                    <td>".$rows["P_status"]."</td>
-                                    <a class = 'btn btn-primary' href='../functions/criminal_update.php?id=$row[Criminal_ID]'>Update</a>
-                            <a class = 'btn btn-danger' href='../functions/criminal_delete.php?id=$row[Criminal_ID]'>Delete</a>
-                            </td>
+								<td>".$row["Criminal_ID"]."</td>
+									<td>".$row["Last"]."</td>
+									<td>".$row["First"]."</td>
+                                    <td>".$row["Street"]."</td>
+                                    <td>".$row["City"]."</td>
+                                    <td>".$row["State"]."</td>
+                                    <td>".$row["Zip"]."</td>
+                                    <td>".$row["Phone"]."</td>
+                                    <td>".$row["V_status"]."</td>
+                                    <td>".$row["P_status"]."</td>
+									<td>
+											<a class = 'btn btn-primary' href='../functions/criminal_update.php?id=$row[Criminal_ID]'>Update</a>
+											<a class = 'btn btn-danger' href='../functions/criminal_delete.php?id=$row[Criminal_ID]'>Delete</a>
+									</td>
                             </tr>
                             ";
 
 						}
+
+						mysql_query($conn, "UNLOCK TABLES");
 						$conn->close();
 
 						?>
