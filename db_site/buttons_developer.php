@@ -1,7 +1,6 @@
 <?php
 session_start();
 include "../connect.php";
-include '../user.php';
 
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
@@ -10,7 +9,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
   exit;
 }
 
-User::checkPerm();
 ?>
 
 <!DOCTYPE html>
