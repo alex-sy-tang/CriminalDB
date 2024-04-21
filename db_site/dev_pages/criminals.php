@@ -4,8 +4,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel = "stylesheet" href = "../styles/style.css">
-
-	
+	<link rel="stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+	<script src = "ps://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>pt>
 </head>
 <body>
 	<nav>
@@ -20,15 +20,16 @@
       		</form>
     	</div>
     	<ul>
-     		 <li><a href="#" class="login">Login</a></li>
+     		 <li><a href="../login.html" class="login">Login</a></li>
     	</ul>
 	 </nav>
-	<div id="Content">
-		<div class="table header">
+	<div id="table_content" class = "container my5">
+		<!--<div class="table header"> -->
 			<h1>Criminals</h1>
-		</div>
+		<!--</div>-->
+		<a class = "btn btn-primary" href ="..//functions/criminals_add.php" role = "button"> Add </a>
 		<div class = "table holder">
-			<table class="full_table">
+			<table class="table">
 				<thead>
 					<tr>
 						<th>Criminal ID</th>
@@ -45,11 +46,39 @@
 				</thead>
 				<tbody>
 					<?php
-						include '../connect.php';
+						include_once '../connect.php';
 						mysqli_query($conn, "LOCK TABLES Criminals READ");
 						$sql = "SELECT * FROM Criminals"; 
+						$result = $conn ->query($sql);
+						if (!result){
+							die("invalid query: " . $conn -> error);
+						}
+						while ($row = $result -> fetch_assoc()){
+							echo"
+							<tr>
+								<td>".$rows["Criminal_ID"]."</td>
+									<td>".$rows["Last"]."</td>
+									<td>".$rows["First"]."</td>
+                                    <td>".$rows["Street"]."</td>
+                                    <td>".$rows["City"]."</td>
+                                    <td>".$rows["State"]."</td>
+                                    <td>".$rows["Zip"]."</td>
+                                    <td>".$rows["Phone"]."</td>
+                                    <td>".$rows["V_status"]."</td>
+                                    <td>".$rows["P_status"]."</td>
+                                    <a class = 'btn btn-primary' href='../functions/criminal_update.php?id=$row[Criminal_ID]'>Update</a>
+                            <a class = 'btn btn-danger' href='../functions/criminal_delete.php?id=$row[Criminal_ID]'>Delete</a>
+                            </td>
+                            </tr>
+                            ";
 
-						$params = [];
+						}
+						$conn->close();
+
+						?>
+					</tbody>
+				</table>
+<!-- 						$params = [];
 						$types = '';
 
 						if($_SERVER["REQUEST_METHOD"] == "GET"){
@@ -89,10 +118,8 @@
 							echo"<tr><td colspan = '3'>No results found</td></tr>";
 						}
 					$conn->close();
-					?>
-				</tbody>
+					?> -->
 
-			</table>
 		</div>
 	</div>
 </body>
