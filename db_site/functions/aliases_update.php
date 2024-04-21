@@ -14,7 +14,7 @@ User::checkPerm();
 
 
 
-$id = "";
+$alias_id = "";
 $criminal_id = "";
 $alias = ""; 
 
@@ -23,13 +23,18 @@ $successMessage = "";
 
 
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
-    if(!isset($_GET["id"])){
+    if(!isset($_GET["alias_id"])){
         header("location: ../dev_pages/aliases.php");
         exit; 
     }
-    $id = $_GET["id"];
+
+    $alias_id = $_GET["alias_id"];
+
+    
+    
+
     //read the row of the selcted client from the database
-    $sql = "SELECT * FROM Aliases WHERE Alias_ID = '$id' "; 
+    $sql = "SELECT * FROM Aliases WHERE Alias_ID = $alias_id "; 
     $result = $conn -> query($sql);
     $row = $result -> fetch_assoc();
     
@@ -38,15 +43,16 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         exit; 
     }
 
-    $id = $row["alias_id"]; 
+    $alias_id = $row["alias_id"]; 
     $criminal_id = $row["criminal_id"]; 
     $alias = $row["alias"]; 
 
 
 
-}else{
+}
+else{
     //$criminal_id = $_POST["criminal_id"]; 
-    $id = $_POST["alias_id"]; 
+    $alias_id = $_POST["alias_id"]; 
     $criminal_id = $_POST["criminal_id"]; 
     $alias = $_POST["alias"]; 
 
@@ -67,10 +73,10 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         }
 
 
-        $sql = "UPDATE Aliases ".
-        "SET Alias = '$alias', Criminal_ID = '$criminal_id' "."WHERE Alias_ID = '$id'"; 
-        $result = $conn -> query($sql); 
-
+        $sql = "UPDATE Aliases SET Alias = ? WHERE Alias_ID = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("si", $alias, $alias_id);
+        $result = $stmt->execute();
 
         if(!$result){
             $errorMessage = "Invalid query: ". $conn -> error;
@@ -114,28 +120,28 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             echo "
             <div class = 'alert alert-warning alert-dimissible fade show' role = 'alert'>
                 <strong>$errorMessage</strong>
-                <button type = 'button' class = 'btn-close' data-bs-dismiss='alert' aria-label = 'Close'></button>
+                <button type = 'button' class = 'btn-close' data-bs-dismiss-'alert' aria-label = 'Close'></button>
             </div>
             ";
         }
         ?>
 
         <form method = "post">
-            <input type="hidden" name = "id" value = "<?php echo $id; ?>">
+           
+            <div class = "row mb-3">
+                    <label class = "col-sm-3 col-form-label" for = "">Alias ID</label>
+                    <div class = "col-sm-6">
+                        <input type = "text" class = "form-contorl" name = "alias_id" value = "<?php echo $alias_id; ?>">
+                    </div>
+                </div>
 
             <input type="hidden" name = "criminal_id" value = "<?php echo $criminal_id; ?>">
 
-            <!-- <div class = "row mb-3">
-                <label class = "col-sm-3 col-form-label" for = "">Criminal ID</label>
-                <div class = "col-sm-6">
-                    <input type = "text" class = "form-contorl" name = "criminal_id" value = "">
-                </div>
-            </div> -->
             
             <div class = "row mb-3">
                 <label class = "col-sm-3 col-form-label" for = "">Alias</label>
                 <div class = "col-sm-6">
-                    <input type = "text" class = "form-control" name = "alias" value = "<?php echo $alias; ?>">
+                    <input type = "text" class = "form-contorl" name = "alias" value = "<?php echo $alias; ?>">
                 </div>
             </div>
 
