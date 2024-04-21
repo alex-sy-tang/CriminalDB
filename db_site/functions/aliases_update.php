@@ -27,11 +27,9 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         header("location: ../dev_pages/aliases.php");
         exit; 
     }
-
     $id = $_GET["id"];
-
     //read the row of the selcted client from the database
-    $sql = "SELECT * FROM Aliases WHERE Alias_ID = $id "; 
+    $sql = "SELECT * FROM Aliases WHERE Alias_ID = '$id' "; 
     $result = $conn -> query($sql);
     $row = $result -> fetch_assoc();
     
@@ -69,7 +67,8 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         }
 
 
-        $sql = "UPDATE Aliases SET Alias = '$alias' WHERE Alias_ID = '$id'"; 
+        $sql = "UPDATE Aliases ".
+          "SET Alias = '$alias' "."WHERE Alias_ID = '$id'"; 
 
         $result = $conn -> query($sql); 
 
@@ -116,7 +115,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             echo "
             <div class = 'alert alert-warning alert-dimissible fade show' role = 'alert'>
                 <strong>$errorMessage</strong>
-                <button type = 'button' class = 'btn-close' data-bs-dismiss-'alert' aria-label = 'Close'></button>
+                <button type = 'button' class = 'btn-close' data-bs-dismiss='alert' aria-label = 'Close'></button>
             </div>
             ";
         }
@@ -137,7 +136,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             <div class = "row mb-3">
                 <label class = "col-sm-3 col-form-label" for = "">Alias</label>
                 <div class = "col-sm-6">
-                    <input type = "text" class = "form-contorl" name = "alias" value = "<?php echo $alias; ?>">
+                    <input type = "text" class = "form-control" name = "alias" value = "<?php echo $alias; ?>">
                 </div>
             </div>
 
