@@ -1,13 +1,19 @@
+
 <?php 
 
 session_start();
 include "../connect.php";
+include '../user.php';
+
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
   // User is not logged in, redirect to login page
   header('Location: ../login.html');
   exit;
 }
+
+User::checkPerm();
+
 
 ?> 
 
@@ -34,13 +40,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
       		</form>
     	</div>
     	<ul>
-        <form action="logout.php" method="POST">
-            <button type="submit">Logout</button>
-        </form>
+			<li><a href="../logout.php" class="login">Logout</a></li>
     	</ul>
         <ul>
-            <li><a href="" class="login">Back</a ></li>
+            <li><a href="../buttons_developer.php" class="login">Back</a></li>
         </ul>
+        <ul>
+			<li><a href="../dev_pages/aliases.php" class="login">Return</a></li>
+    	</ul>
 	 </nav>
 	 
         </div>
@@ -49,7 +56,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 	<div id="table_content" class = "container my5">
 		<!-- <div class="table header"> -->
 		<h2>Aliases</h2>
-        <a class = "btn btn-primary" href="../functions/aliases_add.php" role = "button">Add</a>
+      <a class = "btn btn-primary" href="../functions/aliases_add.php" role = "button">Add</a>
 		<!-- </div> -->
 		<div class = "table holder">
 			<table class = "table">
