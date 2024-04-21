@@ -1,7 +1,7 @@
 <?php
 session_start();
-include "../connect.php";
-include '../user.php';
+include_once "../connect.php";
+include_once '../user.php';
 
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
