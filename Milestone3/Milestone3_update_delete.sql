@@ -32,4 +32,9 @@ UPDATE Crime_charges SET Amount_paid = 8000 WHERE Crimes_ID = 465946633 AND Crim
 UPDATE Officers SET Status_ = 'I' WHERE Officer_ID = 32662492;
 UPDATE Officers SET Status_ = 'A' WHERE Officer_ID = 32662501;
 
+INSERT INTO Aliases (Alias_ID, Criminal_ID, Alias)
+VALUES (998877, 382764, 'Big Shake'),
+       (998866, 052523, 'Dad');
+DELETE FROM Aliases where Alias_ID = 998877 AND Criminal_ID = 382764;
+
 
