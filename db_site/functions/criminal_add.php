@@ -11,16 +11,17 @@
     $v_status="";
     $p_status="";
     if($_SERVER['REQUEST_METHOD']=='POST'){
-        $criminal_id=$_POST["criminal_id"];
-        $last_name=$_POST["last_name"];
-        $first_name=$_POST["first_name"];
-        $street=$_POST["street"];
-        $city=$_POST["city"];
-        $state_us=$_POST["state_us"];
-        $zip=$_POST["zip"];
-        $phone_number=$_POST["phone_number"];
-        $v_status=$_POST["v_status"];
-        $p_status=$_POST["p_status"];
+        $criminal_id = $_POST["criminal_id"];
+        $last_name = $_POST["last_name"];
+        $first_name = $_POST["first_name"];
+        $street = $_POST["street"];
+        $city = $_POST["city"];
+        $state_us = $_POST["state_us"];
+        $zip = $_POST["zip"];
+        $phone_number = $_POST["phone_number"];
+        $v_status = $_POST["v_status"];
+        $p_status = $_POST["p_status"];
+
         do{
              //if any of the input field is empty, 
             //return an error message and break out of the loop
@@ -28,8 +29,9 @@
                     $errorMessage = "All the fields are required";
                     break; 
             } 
+
             $sql = "INSERT INTO Criminals(Criminal_ID, Last_name, First_name, Street, City, State_US, Zip, phone_number, V_status, P_status)".
-            "VALUES('$criminal_id", '$last_name', '$first_name', '$street', '$city', '$state_us', '$zip', '$phone_number', '$v_status', '$p_status')";
+            "VALUES('$criminal_id', '$last_name', '$first_name', '$street', '$city', '$state_us', '$zip', '$phone_number', '$v_status', '$p_status')";
             $result = $conn ->query($sql);
             if(!$result){
                 $errorMessage = "Invalid query: " . $conn->error;
@@ -50,7 +52,7 @@
             $successMessage = "Client added correctly";
             //redirect to the table once the post request is finished  
             // and exit
-            header("location: ../dev_pages/aliases.php");
+            header("location: ../dev_pages/criminals.php");
             exit;
 
             }while(false); 
@@ -114,7 +116,7 @@
             <div class = "row mb-3">
                 <label class = "col-sm-3 col-form-label" for = "">State US</label>
                 <div class = "col-sm-6">
-                    <input type = "text" class = "form-contorl" name = "last_name" value = "<?php echo $last_name; ?>">
+                    <input type = "text" class = "form-contorl" name = "state_us" value = "<?php echo $state_us; ?>">
                 </div>
             </div>
             <div class = "row mb-3">
