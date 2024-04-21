@@ -20,7 +20,7 @@ $user = User::addUser($row);
         header("Location: buttons_developer.php"); // for developer. 
         exit();
         }else{
-        header("Location: search.php"); // for user only
+        header("Location: buttons_users.php"); // for user only
         exit();
         }
 
