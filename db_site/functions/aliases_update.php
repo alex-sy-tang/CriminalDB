@@ -123,9 +123,9 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         ?>
 
         <form method = "post">
-            <input type="hidden" name = "id" value = "<?php echo $id; ?>">
+            <input type="hidden" name = "id" value = "<?php echo $id->id; ?>">
 
-            <input type="hidden" name = "criminal_id" value = "<?php echo $criminal_id; ?>">
+            <input type="hidden" name = "criminal_id" value = "<?php echo $criminal_id->criminal_id; ?>">
 
             <!-- <div class = "row mb-3">
                 <label class = "col-sm-3 col-form-label" for = "">Criminal ID</label>
@@ -137,7 +137,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             <div class = "row mb-3">
                 <label class = "col-sm-3 col-form-label" for = "">Alias</label>
                 <div class = "col-sm-6">
-                    <input type = "text" class = "form-contorl" name = "alias" value = "<?php echo $alias; ?>">
+                    <input type = "text" class = "form-contorl" name = "alias" value = "<?php echo $alias->alias; ?>">
                 </div>
             </div>
 
