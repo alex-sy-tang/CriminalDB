@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+include "../connect.php";
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+  // User is not logged in, redirect to login page
+  header('Location: ../login.html');
+  exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,13 +27,19 @@
     	</div>
     
     	<div class="search-bar">
-      		<form action="criminals.php" method = "GET">
-        		<input type="text" name = "search_criminal_id" placeholder="Search by Criminal ID...">
+      		<form action="../functions/criminal_totalcharge.php" method = "GET">
+        		<input type="text" name = "search_query" placeholder="Criminal Charge">
 				<button type = "submit">Search</button>
       		</form>
     	</div>
     	<ul>
-     		 <li><a href="../login.html" class="login">Login</a></li>
+			<li><a href="../logout.php" class="login">Logout</a></li>
+    	</ul>
+	<ul>
+			<li><a href="../buttons_developer.php" class="login">Back</a></li>
+    	</ul>
+        <ul>
+			<li><a href="../dev_pages/criminals.php" class="login">Return</a></li>
     	</ul>
 	 </nav>
 	<div id="table_content" class = "container my5">
