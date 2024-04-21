@@ -43,7 +43,6 @@
     <!--<div class="table header"> -->
       <h1>Crime Officers</h1>
     <!--</div>-->
-    <a class = "btn btn-primary" href ="..//functions/criminals_officers_add.php" role = "button"> Add </a>
     <div class = "table holder">
       <table class="table">
         <thead>
