@@ -43,7 +43,7 @@
   <div id="table_content" class = "container my5">
     <!--<div class="table header"> -->
       <h1>Crime Charges</h1>
-  <a class = "btn btn-primary" href ="..//functions/criminals_add.php" role = "button"> Add </a>
+  <a class = "btn btn-primary" href ="..//functions/crime_charges_add.php" role = "button"> Add </a>
   <div class = "table holder">
   <table class="table">
         <thead>
@@ -62,7 +62,7 @@
           include_once '../connect.php';
           mysqli_query($conn, "LOCK TABLES Crime_charges READ");
           $sql = "SELECT * FROM Crime_charges"; 
-          {$result = $conn ->query($sql);
+          $result = $conn ->query($sql);
                         if (!result){
                           die("invalid query: " . $conn -> error);
                         }
@@ -77,18 +77,19 @@
                             <td>".$rows['Court_fee']."</td>
                             <td>".$rows['Amount_paid']."</td>
                             <td>".$rows['Pay_due_date']."</td>
-                            <a class = 'btn btn-primary' href='../functions/charges_update.php?id=$row[Charge_ID]'>Update</a>
-                            <a class = 'btn btn-danger' href='../functions/charges_delete.php?id=$row[Charge_ID]'>Delete</a>
+                            <a class = 'btn btn-primary' href='../functions/crime_charges_update.php?id=$row[Charge_ID]'>Update</a>
+                            <a class = 'btn btn-danger' href='../functions/crime_charges_delete.php?id=$row[Charge_ID]'>Delete</a>
                             </td>
                             </tr>
-                            "; }
-                              $conn->close();
-                              ?>
-                            </table>
-                          </div>
-                        </div>
-                      </body>
-                      </html>
+                            "; 
+                          }
+                        $conn->close();
+                      ?>
+  </table>
+</div>
+</div>
+</body>
+</html>
                       
 
                 
