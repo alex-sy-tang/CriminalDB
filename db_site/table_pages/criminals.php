@@ -6,6 +6,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel = "stylesheet" href = "../styles/style.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <script src = "	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 	
 </head>
 <body>
@@ -15,21 +17,24 @@
     	</div>
     
     	<div class="search-bar">
-      		<form action="criminals.php" method = "GET">
-        		<input type="text" name = "search_criminal_id" placeholder="Search by Criminal ID...">
+			<form action="criminals.php" method = "GET">
+        		<input type="text" name = "search_by_id" placeholder="Enter ID">
 				<button type = "submit">Search</button>
       		</form>
     	</div>
     	<ul>
-			<li><a href="../logout.php" class="login">Logout</a></li>
-	</ul>
-	 </nav>
-	<div id="Content">
+   			<li><a href="../login.html" class="login">Logout</a ></li>
+     	</ul>
+		<ul>
+			<li><a href="../table_pages/criminals.php" class="login">Back</a ></li>
+		</ul>
+	</nav>
+	<div id="table_content" class = "container my5">
 		<div class="table header">
-			<h1>Criminals</h1>
+			<h2>Criminals</h2>
 		</div>
 		<div class = "table holder">
-			<table class="full_table">
+			<table class="table">
 				<thead>
 					<tr>
 						<th>Criminal ID</th>
@@ -46,17 +51,18 @@
 				</thead>
 				<tbody>
 					<?php
+					
 						include '../connect.php';
 						mysqli_query($conn, "LOCK TABLES Criminals READ");
-						$sql = "SELECT * FROM Criminals"; 
 
+						$sql = "SELECT * FROM Criminals"; 
 						$params = [];
 						$types = '';
 
 						if($_SERVER["REQUEST_METHOD"] == "GET"){
-							if(!empty($_GET['search_criminal_id'])){
+							if(!empty($_GET['search_by_id'])){
 								$sql .= " WHERE Criminal_ID = ?"; 
-								$params[] = $_GET['search_criminal_id'];
+								$params[] = $_GET['search_by_id'];
 								$types .= 'i'; 
 							}
 						}
@@ -73,8 +79,8 @@
 							while($rows = $result->fetch_assoc()){
 								echo"<tr>
 									<td>".$rows["Criminal_ID"]."</td>
-									<td>".$rows["Last"]."</td>
-									<td>".$rows["First"]."</td>
+									<td>".$rows["Last_name"]."</td>
+									<td>".$rows["First_name"]."</td>
                                     <td>".$rows["Street"]."</td>
                                     <td>".$rows["City"]."</td>
                                     <td>".$rows["State"]."</td>
@@ -84,11 +90,9 @@
                                     <td>".$rows["P_status"]."</td>
 								</tr>";
 							}
-						mysqli_query($conn, "UNLOCK TABLES");
-						}else{
-							mysqli_query($conn, "UNLOCK TABLES");
-							echo"<tr><td colspan = '3'>No results found</td></tr>";
+						
 						}
+					mysqli_query($conn, "UNLOCK TABLES");
 					$conn->close();
 					?>
 				</tbody>
