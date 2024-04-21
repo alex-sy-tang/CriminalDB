@@ -1,5 +1,18 @@
 <?php
-include_once "../connect.php"; 
+session_start();
+include "../connect.php";
+include '../user.php';
+
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+  // User is not logged in, redirect to login page
+  header('Location: ../login.html');
+  exit;
+}
+
+User::checkPerm();
+
+
 
 $id = "";
 $criminal_id = "";
@@ -27,35 +40,39 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         exit; 
     }
 
-    $id = $row["id"]; 
+    $id = $row["alias_id"]; 
     $criminal_id = $row["criminal_id"]; 
     $alias = $row["alias"]; 
 
+
+
 }else{
     //$criminal_id = $_POST["criminal_id"]; 
-    $id = $_POST["id"]; 
+    $id = $_POST["alias_id"]; 
     $criminal_id = $_POST["criminal_id"]; 
     $alias = $_POST["alias"]; 
 
     //echo($alias_id);
-    
 
-    do{
+
 
         // if(empty($criminal_id) || empty($alias)){
         //     $errorMessage = "All the fileds are required"; 
         //     break; 
         // }
 
-
+     do{
         if(empty($alias)){
+
             $errorMessage = "All the fields are required";
             break; 
         }
 
-        $sql = "UPDATE Aliases SET Alias = '$alias' WHERE Alias_ID = $id" ; 
+
+        $sql = "UPDATE Aliases SET Alias = '$alias' WHERE Alias_ID = '$id'"; 
 
         $result = $conn -> query($sql); 
+
 
         if(!$result){
             $errorMessage = "Invalid query: ". $conn -> error;
@@ -66,8 +83,8 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
         header("location: ../dev_pages/aliases.php"); 
         exit; 
+    }while(false);
 
-    }while(false); 
     // The REQUEST METHOD IS POST
 
     //read the data from the input

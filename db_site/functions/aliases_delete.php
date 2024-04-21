@@ -1,6 +1,18 @@
 <?php
-    include_once "../connect.php";
-    if(isset($_GET["id"])){
+session_start();
+include "../connect.php";
+include '../user.php';
+
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+  // User is not logged in, redirect to login page
+  header('Location: ../login.html');
+  exit;
+}
+
+User::checkPerm();
+
+if(isset($_GET["id"])){
          $alias_id = $_GET["id"]; 
 
         

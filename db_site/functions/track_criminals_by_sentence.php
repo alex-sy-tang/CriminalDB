@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "../connect.php";
+include_once "../connect.php"; 
 include '../user.php';
 
 
@@ -35,12 +35,12 @@ User::checkPerm();
 			<li><a href="../buttons_developer.php" class="login">Back</a></li>
     	</ul>
         <ul>
-			<li><a href="../dev_pages/criminals.php" class="login">Return</a></li>
+			<li><a href="../dev_pages/sentences_dev.php" class="login">Return</a></li>
     	</ul>
 	 </nav>
 	<div id="Content">
 		<div class="table header">
-			<h1>The Criminal's total charges</h1>
+			<h1>The Criminal with the Sentence</h1>
 		</div>
 		<div class = "table holder">
 			<table class="full_table">
@@ -49,10 +49,16 @@ User::checkPerm();
 						<th>Criminal ID</th>
 						<th>Last Name </th>
 						<th> First Name </th>
-						<th>Fine amount</th>
-						<th>Court fee</th>
-						<th>Amount paid</th>
-						<th>Total balance</th>
+						<th>Phone number</th>
+						<th>Violation status</th>
+						<th>Probation status</th>
+						<th>Sentencing ID</th>
+						<th>Sentence type</th>
+						<th>Police ID</th>
+						<th>Start date</th>
+						<th>End date</th>
+						<th>Number of violations</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -65,23 +71,21 @@ User::checkPerm();
                     // header('Location: ../dev_pages/criminals.php');
                         }
 
-                    $sql = "(SELECT SUM(cc.Fine_amount) AS Total_Fine, SUM(cc.Court_fee) AS Total_Court_fee, SUM(cc.Amount_paid) AS Total_Amount_paid
-                            FROM Crime_charges cc
-                             WHERE cc.Crimes_ID IN (SELECT cr.Crimes_ID
-                                FROM Crimes cr
-                                WHERE cr.Criminal_ID IN (SELECT crim.Criminal_ID
-                                                FROM Criminals crim
-                                                WHERE crim.Criminal_ID = $searchQuery
-                                                )
-                                         )
-                            )";
+                    $sql = "SELECT *
+                    FROM Criminals cr
+                    WHERE cr.Criminal_ID IN (SELECT c.Criminal_ID
+                                             From Crimes c
+                                             WHERE c.Crimes_ID IN  (SELECT s.Crimes_ID
+                                                                     From Sentencing s
+                                                                     WHERE s.Sentencing_ID = $searchQuery)                            
+                                            )";
 
                     //Charge result
                     $result = $conn->query($sql);
 
 
-                    $sql = "SELECT Criminal_ID AS ID, Last_name AS Last, First_name AS First
-                         FROM Criminals WHERE Criminals.Criminal_ID = $searchQuery";
+                    $sql = "SELECT * 
+                         FROM Sentencing WHERE Sentencing.Sentencing_ID = $searchQuery";
 
                     //Name result
                     $name_result = $conn->query($sql);
@@ -89,17 +93,20 @@ User::checkPerm();
                      if ($result->num_rows > 0 && $name_result->num_rows > 0) {
                      $row = $result->fetch_assoc();
                      $name_row = $name_result->fetch_assoc();
-                     $totalBalance = $row['Total_Fine'] + $row['Total_Court_fee'] - $row['Total_Amount_paid'];
-                     $totalBalance = (double) $totalBalance;
      
 								echo"<tr>
-									<td>".$name_row["ID"]."</td>
-									<td>".$name_row["Last"]."</td>
-									<td>".$name_row["First"]."</td>
-                                    <td>".$row['Total_Fine']."</td>
-                                    <td>".$row['Total_Court_fee']."</td>
-                                    <td>".$row['Total_Amount_paid']."</td>
-                                    <td>".$totalBalance."</td>
+									<td>".$row["Criminal_ID"]."</td>
+									<td>".$row["Last_name"]."</td>
+									<td>".$row["First_name"]."</td>
+                                    <td>".$row['phone_number']."</td>
+                                    <td>".$row['V_status']."</td>
+                                    <td>".$row['P_status']."</td>
+                                    <td>".$name_row['Sentencing_ID']."</td>
+                                    <td>".$name_row['Sentence_type']."</td>
+                                    <td>".$name_row['Prob_ID']."</td>
+                                    <td>".$name_row['Start_date']."</td>
+                                    <td>".$name_row['End_date']."</td>
+                                    <td>".$name_row['Number_of_violations']."</td>
 								</tr>";
 							
 						}else{
