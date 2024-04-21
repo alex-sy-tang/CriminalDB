@@ -13,8 +13,15 @@
     	<div class="logo">
       		<h1>CRIMINAL DATABASE</h1>
     	</div>
+    
+    	<div class="search-bar">
+      		<form action="aliases.php" method = "GET">
+        		<input type="text" name = "search_by_id" placeholder="Enter ID">
+                <button type = "submit">Search</button>
+      		</form>
+    	</div>
     	<ul>
-     		 <li><a href="../login.html" class="login">Login</a></li>
+     		 <li><a href="#" class="login">Login</a></li>
     	</ul>
 	 </nav>
 	 
@@ -38,8 +45,41 @@
                 <tbody>
                     <?php
                     include_once "../connect.php"; 
+                    // if(isset($_POST['search_by_id'])){
+                    //     $id = $_POST['get_id'];
+                    //     $query = "SELECT * FROM employee WHERE id='$id' "; 
+
+                    // }
+                   
+
                     $sql = "SELECT * FROM Aliases";
-                    $result = $conn -> query($sql); 
+                    $params = [];
+                    $types = '';
+
+                    if($_SERVER["REQUEST_METHOD"] == "GET"){
+                        if(!empty($_GET["search_by_id"])){
+                            $sql .= " WHERE Alias_ID = ?";
+                            $params[] = $_GET['search_by_id'];
+                            $types .= 'i'; 
+                        }
+                    }
+                    
+
+                    $stmt = $conn -> prepare($sql);
+
+                    if($params){
+                        $stmt -> bind_param($types, ...$params); 
+                    }
+
+                    $stmt -> execute();
+                    $result = $stmt -> get_result(); 
+                    // if(isset($_POST['search'])){
+                    //     $id = $_POST['search_by_id']; 
+                    //     $sql = " SELECT * FROM Aliases WHERE Alias_ID = $id ";  
+                    // }
+
+
+                    //$result = $conn -> query($sql); 
 
                     if(!$result){
                         die("Invalid query: " . $conn -> error); 
