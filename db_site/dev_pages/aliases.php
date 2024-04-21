@@ -1,3 +1,16 @@
+<?php 
+
+session_start();
+include "../connect.php";
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+  // User is not logged in, redirect to login page
+  header('Location: ../login.html');
+  exit;
+}
+
+?> 
+
 
 <!DOCTYPE html>
 <html>
@@ -21,8 +34,13 @@
       		</form>
     	</div>
     	<ul>
-     		 <li><a href="#" class="login">Login</a></li>
+        <form action="logout.php" method="POST">
+            <button type="submit">Logout</button>
+        </form>
     	</ul>
+        <ul>
+            <li><a href="" class="login">Back</a ></li>
+        </ul>
 	 </nav>
 	 
         </div>
@@ -45,6 +63,7 @@
                 <tbody>
                     <?php
                     include_once "../connect.php"; 
+                    mysqli_query($conn, "LOCK TABLES Aliases READ");
                     // if(isset($_POST['search_by_id'])){
                     //     $id = $_POST['get_id'];
                     //     $query = "SELECT * FROM employee WHERE id='$id' "; 
@@ -98,6 +117,10 @@
                         </tr>
                         ";
                     }
+
+                    mysql_query($conn, "UNLOCK TABLES");
+					$conn->close();
+					
 
                     ?>
                 </tbody>
