@@ -13,14 +13,8 @@
     	<div class="logo">
       		<h1>CRIMINAL DATABASE</h1>
     	</div>
-    
-    	<div class="search-bar">
-      		<form action="#">
-        		<input type="text" placeholder="Search">
-      		</form>
-    	</div>
     	<ul>
-     		 <li><a href="#" class="login">Login</a></li>
+     		 <li><a href="../login.html" class="login">Login</a></li>
     	</ul>
 	 </nav>
 	 
