@@ -1,18 +1,26 @@
+<?php 
 
-<?php
-include '../connect.php';
+session_start();
+include "../connect.php";
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+  // User is not logged in, redirect to login page
+  header('Location: ../login.html');
+  exit;
+}
+
+?> 
 
 
-$sql = " SELECT * FROM Crimes ";
-$result = $conn->query($sql);
-$conn->close();
-?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel = "stylesheet" href = "../styles/style.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <script src = "	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 	
 </head>
 <body>
@@ -22,20 +30,26 @@ $conn->close();
     	</div>
     
     	<div class="search-bar">
-      		<form action="#">
-        		<input type="text" placeholder="Search">
+      		<form action="crimes.php" method = "GET">
+        		<input type="text" name = "search_by_id" placeholder="Enter ID">
+				<button type = "submit">Search</button>
       		</form>
     	</div>
     	<ul>
-			<li><a href="../logout.php" class="login">Logout</a></li>
-		</ul>
+			<form action="logout.php" method="POST">
+			<button type="submit">Logout</button>
+			</form>
+    	</ul>
+		<ul>
+   			<li><a href=" " class="login">Back</a ></li>
+     	</ul>
 	 </nav>
-	<div class="table_content">
+	<div id="table_content" class = "container my5">
 		<div class="table header">
 			<h1>Crimes</h1>
 		</div>
 		<div class = "table holder">
-			<table class="full_table">
+			<table class="table">
 				<tr>
 					<th>Crime ID</th>
 					<th>Criminal ID </th>
@@ -46,21 +60,52 @@ $conn->close();
 					<th>Appeal Cutoff Date</th>
 				</tr>
 				<?php
-					while($rows=$result->fetch_assoc()){
+					
+						include '../connect.php';
+						mysqli_query($conn, "LOCK TABLES Crimes READ");
 
-				?>
-				<tr>
-						<td><?php echo $rows['Crimes_ID'];?></td>
-						<td><?php echo $rows['Criminal_ID'];?></td>
-						<td><?php echo $rows['Classification'];?></td>
-						<td><?php echo $rows['Date_charged'];?></td>
-						<td><?php echo $rows['Status'];?></td>
-						<td><?php echo $rows['Hearing_date'];?></td>
-						<td><?php echo $rows['Appeal_cut_date'];?></td>
-				</tr>
-				<?php
-					}
-				?>
+						$sql = "SELECT * FROM Crimes"; 
+						$params = [];
+						$types = '';
+
+						if($_SERVER["REQUEST_METHOD"] == "GET"){
+							if(!empty($_GET['search_by_id'])){
+								$sql .= " WHERE Crimes_ID = ?"; 
+								$params[] = $_GET['search_by_id'];
+								$types .= 'i'; 
+							}
+						}
+
+						$stmt = $conn -> prepare($sql);
+						if($params){
+							$stmt -> bind_param($types, ...$params);
+						}
+
+						$stmt->execute();
+						$result = $stmt->get_result(); 
+
+						if(!$result){
+							die("Invalid query: " . $conn -> error); 
+						}
+
+						
+					while($rows = $result->fetch_assoc()){
+						echo"<tr>
+							<td>".$rows["Crimes_ID"]."</td>
+							<td>".$rows["Criminal_ID"]."</td>
+							<td>".$rows["Classification"]."</td>
+							<td>".$rows["Date_charged"]."</td>
+							<td>".$rows["Status_"]."</td>
+							<td>".$rows["Hearing_date"]."</td>
+							<td>".$rows["Appeal_cut_date"]."</td>
+						</tr>";
+							
+						
+						}
+
+					mysqli_query($conn, "UNLOCK TABLES");		
+					$conn->close();
+					?>
 			</table>
 		</div>
 	</div>
