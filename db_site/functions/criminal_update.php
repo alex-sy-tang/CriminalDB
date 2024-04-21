@@ -26,7 +26,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     $id = $_GET["criminal_id"];
 
     //read the row of the selcted client from the database
-    $sql = "SELECT * FROM Criminals WHERE Criminal_ID = $criminal_id "; 
+    $sql = "SELECT * FROM Criminals WHERE Criminal_ID = '$criminal_id' "; 
     $result = $conn -> query($sql);
     $row = $result -> fetch_assoc();
     
