@@ -27,6 +27,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     	<div class="logo">
       		<h1>CRIMINAL DATABASE</h1>
     	</div>
+
+        <div class="search-bar">
+      		<form action="../functions/user_track_criminals_by_officers.php" method = "GET">
+        		<input type="text" name = "search_query" placeholder="Search Criminal">
+				<button type = "submit">Search</button>
+      		</form>
+    	</div>
 	
     	<div class="search-bar">
 			<form action="officers.php" method = "GET">
@@ -37,8 +44,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     	<ul>
    			<li><a href="../login.html" class="login">Logout</a ></li>
      	</ul>
+    	<ul>
+			<li><a href="../buttons_users.php" class="login">Back</a></li>
+        </ul>
+
 		<ul>
-			<li><a href="../table_pages/officers.php" class="login">Back</a ></li>
+			<li><a href="../table_pages/officers.php" class="login">Return</a ></li>
 		</ul>
 	 </nav>
 	<div id="table_content" class = "container">

@@ -1,4 +1,15 @@
+<?php 
 
+session_start();
+include "../connect.php";
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+  // User is not logged in, redirect to login page
+  header('Location: ../login.html');
+  exit;
+}
+
+?> 
 
 <!DOCTYPE html>
 <html>
@@ -25,8 +36,12 @@
     	<ul>
    			<li><a href="../login.html" class="login">Logout</a ></li>
      	</ul>
+    	<ul>
+			<li><a href="../buttons_users.php" class="login">Back</a></li>
+        </ul>
+
 		<ul>
-			<li><a href="../table_pages/crime_codes.php" class="login">Back</a ></li>
+			<li><a href="../table_pages/crime_codes.php" class="login">Return</a ></li>
 		</ul>
 	 </nav>
 	<div id="table_content" class = "container my5">

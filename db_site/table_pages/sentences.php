@@ -28,6 +28,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
       		<h1>CRIMINAL DATABASE</h1>
     	</div>
     
+		<div class="search-bar">
+      		<form action="../functions/user_track_criminals_by_sentence.php" method = "GET">
+        		<input type="text" name = "search_query" placeholder="Search Criminal">
+				<button type = "submit">Search</button>
+      		</form>
+    	</div>
+
     	<div class="search-bar">
 			<form action="sentences.php" method = "GET">
         		<input type="text" name = "search_by_id" placeholder="Enter ID">
@@ -37,8 +44,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     	<ul>
    			<li><a href="../login.html" class="login">Logout</a ></li>
      	</ul>
+    	<ul>
+			<li><a href="../buttons_users.php" class="login">Back</a></li>
+        </ul>
+
 		<ul>
-			<li><a href="../table_pages/sentences.php" class="login">Back</a ></li>
+			<li><a href="../table_pages/sentences.php" class="login">Return</a ></li>
 		</ul>
 	 </nav>
 	<div id="table_content" class = "container my5">
@@ -104,7 +115,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <tr>
                             <td>$row[Sentencing_ID]</td>
                             <td>$row[Crimes_ID]</td>
-                            <td>$row[Sentencing_type]</td>
+                            <td>$row[Sentence_type]</td>
 							<td>$row[Prob_ID]</td>
                             <td>$row[Start_date]</td>
                             <td>$row[End_date]</td>

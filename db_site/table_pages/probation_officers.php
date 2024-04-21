@@ -1,7 +1,9 @@
+
 <?php 
 
 session_start();
 include "../connect.php";
+
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
   // User is not logged in, redirect to login page
@@ -11,15 +13,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 ?> 
 
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel = "stylesheet" href = "../styles/style.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <script src = "	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-	
 </head>
 <body>
 	<nav>
@@ -28,39 +30,50 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     	</div>
     
     	<div class="search-bar">
-			<form action="../table_pages/probation_officers.php" method = "GET">
+      		<form action="probation_officers.php" method = "GET">
         		<input type="text" name = "search_by_id" placeholder="Enter ID">
-				<button type = "submit">Search</button>
+                <button type = "submit">Search</button>
       		</form>
     	</div>
     	<ul>
-   			<li><a href="../login.html" class="login">Logout</a ></li>
-     	</ul>
-		<ul>
-			<li><a href="../table_pages/probation_officers.php" class="login">Back</a ></li>
-		</ul>
+			<li><a href="../logout.php" class="login">Logout</a></li>
+    	</ul>
+        <ul>
+			<li><a href="../buttons_users.php" class="login">Back</a></li>
+        </ul>
+        <ul>
+			<li><a href="../table_pages/probation_officers.php" class="login">Return</a></li>
+    	</ul>
 	 </nav>
+	 
+        </div>
+
+
 	<div id="table_content" class = "container my5">
-		<div class="table header">
-			<h1>Probation Officers</h1>
-		</div>
+		<!-- <div class="table header"> -->
+		<h2>Probation Officers</h2>
+		<!-- </div> -->
 		<div class = "table holder">
-			<table class="table">
-				<tr>
-					<th>Probation Officer ID</th>
-					<th>Last Name </th>
-					<th> First Name </th>
-					<th>Street</th>
-					<th>City</th>
-					<th>State</th>
-					<th>Zip Code</th>
-					<th>Phone Number</th>
-					<th>Email</th>
-					<th>Status</th>
-				</tr>
-				<?php
+			<table class = "table">
+                <thead>
+                    <tr>
+                        <th>Prob ID</th>
+                        <th>Last name</th>
+                        <th>First name</th>
+						<th>Street</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip</th>
+                        <th>Phone_number</th>
+                        <th>Email</th>
+                        <th>Status_</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
                     include_once "../connect.php"; 
-                    mysqli_query($conn, "LOCK TABLES Prob_officer");
+                    mysqli_query($conn, "LOCK TABLES Prob_officer READ");
                     // if(isset($_POST['search_by_id'])){
                     //     $id = $_POST['get_id'];
                     //     $query = "SELECT * FROM employee WHERE id='$id' "; 
@@ -69,7 +82,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                    
 
                     $sql = "SELECT * FROM Prob_officer";
-                    $param = [];
+                    $params = [];
                     $types = '';
 
                     if($_SERVER["REQUEST_METHOD"] == "GET"){
@@ -106,13 +119,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <tr>
                             <td>$row[Prob_ID]</td>
                             <td>$row[Last_name]</td>
-							<td>$row[First_name]</td>
-                            <td>$row[Street]</td>
-							<td>$row[City]</td>
-							<td>$row[Status_US]</td>
-							<td>$row[Zip]</td>
+                            <td>$row[First_name]</td>
+							<td>$row[Street]</td>
+                            <td>$row[City]</td>
+                            <td>$row[State_US]</td>
+                            <td>$row[Zip]</td>
                             <td>$row[Phone_number]</td>
-							<td>$row[Email]</td>
+                            <td>$row[Email]</td>
+                            <td>$row[Status_]</td>
+
                         </tr>
                         ";
                     }
@@ -122,6 +137,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 					
 
                     ?>
+                </tbody>
+        		
+        		
 			</table>
 		</div>
 	</div>
