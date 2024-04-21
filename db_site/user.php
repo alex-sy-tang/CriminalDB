@@ -27,6 +27,12 @@ class User {
         return false;
     }
     
+    public function isPolice() {
+        if ($this->isPolice == true){
+            return true;
+        }
+        return false;
+    }
 
     public function login($un, $pass) {
         // decode the hash function
@@ -44,6 +50,14 @@ class User {
         $user = unserialize($_SESSION['user']);
         if (!$user->isDevelop()) {
             header('Location: ../logout.php');
+            exit();       
+         }
+    }
+
+    public static function checkPolice() {
+        $user = unserialize($_SESSION['user']);
+        if (!$user->isPolice()) {
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
             exit();       
          }
     }
