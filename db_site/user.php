@@ -42,9 +42,10 @@ class User {
     
     public static function checkPerm() {
         $user = unserialize($_SESSION['user']);
-        if ($user->isPolice() == false) {
-            die ('No permission to access! <a href="crimes.php"> go back </a>');
-        }
+        if (!$user->isDevelop()) {
+            header('Location: ../logout.php');
+            exit();       
+         }
     }
 
     public static function isLogined() {

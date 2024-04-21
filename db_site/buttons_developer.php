@@ -155,16 +155,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
   <h3>Select data to view</h3>
   <div class="buttons">
   <ul>
-    <li class = "button_li"><a href="table_pages/aliases.php" style="color: black">Aliases</a></li>
-    <li class = "button_li"><a href="table_pages/criminals.php" style="color: black">Criminals</a></li>
-    <li class = "button_li"><a href="table_pages/crimes.php" style="color: black">Crimes</a></li>
-    <li class = "button_li"><a href="table_pages/sentences.php" style="color: black">Sentences</a></li>
-    <li class = "button_li"><a href="table_pages/crime_charges.php" style="color: black">Crime charges</a></li>
-    <li class = "button_li"><a href="table_pages/officers.php" style="color: black">Officers</a></li>
-    <li class = "button_li"><a href="table_pages/appeals.php" style="color: black">Appeals</a></li>
-    <li class = "button_li"><a href="table_pages/crime_codes.php" style="color: black">Crime codes</a></li>
-    <li class = "button_li"><a href="table_pages/probation_officers.php" style="color: black">Probation officers</a></li>
-    <li class = "button_li"><a href="table_pages/crime_officers.php" style="color: black">Crime officers</a></li>
+    <li class = "button_li"><a href="dev_pages/aliases.php" style="color: black">Aliases</a></li>
+    <li class = "button_li"><a href="dev_pages/criminals.php" style="color: black">Criminals</a></li>
+    <li class = "button_li"><a href="dev_pages/crimes_dev.php" style="color: black">Crimes</a></li>
+    <li class = "button_li"><a href="dev_pages/sentences_dev.php" style="color: black">Sentences</a></li>
+    <li class = "button_li"><a href="dev_pages/crime_charges_dev.php" style="color: black">Crime charges</a></li>
+    <li class = "button_li"><a href="dev_pages/officers_dev.php" style="color: black">Officers</a></li>
+    <li class = "button_li"><a href="dev_pages/appeals_dev.php" style="color: black">Appeals</a></li>
+    <li class = "button_li"><a href="dev_pages/crime_codes_dev.php" style="color: black">Crime codes</a></li>
+    <li class = "button_li"><a href="dev_pages/probation_officers_dev.php" style="color: black">Probation officers</a></li>
+    <li class = "button_li"><a href="dev_pages/crime_officers_dev.php" style="color: black">Crime officers</a></li>
   </ul>
   </div>
 </body>
