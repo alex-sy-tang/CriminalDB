@@ -68,8 +68,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
 
         $sql = "UPDATE Aliases ".
-          "SET Alias = '$alias' "."WHERE Alias_ID = '$id'"; 
-
+        "SET Alias = '$alias', Criminal_ID = '$criminal_id' "."WHERE Alias_ID = '$id'"; 
         $result = $conn -> query($sql); 
 
 
