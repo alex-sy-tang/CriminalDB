@@ -109,43 +109,43 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             <div class = "row mb-3">
                 <label class = "col-sm-3 col-form-label" for = "">Officer ID</label>
                 <div class = "col-sm-6">
-                    <input type = "text" class = "form-contorl" name = "officer_id" value = "<?php echo $officer_id; ?>">
+                    <input type = "text" class = "form-control" name = "officer_id" value = "<?php echo $officer_id; ?>">
                 </div>
             </div>
              <div class = "row mb-3">
                 <label class = "col-sm-3 col-form-label" for = "">Last Name</label>
                 <div class = "col-sm-6">
-                    <input type = "text" class = "form-contorl" name = "last_name" value = "<?php echo $last_name; ?>">
+                    <input type = "text" class = "form-control" name = "last_name" value = "<?php echo $last_name; ?>">
                 </div>
             </div>
              <div class = "row mb-3">
                 <label class = "col-sm-3 col-form-label" for = "">First Name</label>
                 <div class = "col-sm-6">
-                    <input type = "text" class = "form-contorl" name = "first_name" value = "<?php echo $first_name; ?>">
+                    <input type = "text" class = "form-control" name = "first_name" value = "<?php echo $first_name; ?>">
                 </div>
             </div>
              <div class = "row mb-3">
                 <label class = "col-sm-3 col-form-label" for = "">Precinct</label>
                 <div class = "col-sm-6">
-                    <input type = "text" class = "form-contorl" name = "precinct" value = "<?php echo $precinct; ?>">
+                    <input type = "text" class = "form-control" name = "precinct" value = "<?php echo $precinct; ?>">
                 </div>
             </div>
              <div class = "row mb-3">
                 <label class = "col-sm-3 col-form-label" for = "">Badge</label>
                 <div class = "col-sm-6">
-                    <input type = "text" class = "form-contorl" name = "badge" value = "<?php echo $badge; ?>">
+                    <input type = "text" class = "form-control" name = "badge" value = "<?php echo $badge; ?>">
                 </div>
             </div>
              <div class = "row mb-3">
                 <label class = "col-sm-3 col-form-label" for = "">Phone</label>
                 <div class = "col-sm-6">
-                    <input type = "text" class = "form-contorl" name = "phone" value = "<?php echo $phone; ?>">
+                    <input type = "text" class = "form-control" name = "phone" value = "<?php echo $phone; ?>">
                 </div>
             </div>
              <div class = "row mb-3">
                 <label class = "col-sm-3 col-form-label" for = "">Status</label>
                 <div class = "col-sm-6">
-                    <input type = "text" class = "form-contorl" name = "status" value = "<?php echo $status; ?>">
+                    <input type = "text" class = "form-control" name = "status" value = "<?php echo $status; ?>">
                 </div>
             </div>
             <div class = "row mb-3">
