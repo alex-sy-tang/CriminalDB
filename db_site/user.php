@@ -4,6 +4,7 @@ class User {
     public $password;
     public $firstname;
     public $lastname;
+    public $isPolice;
     public $isDeveloper; // select the role of the users 
 
     //Create new users
