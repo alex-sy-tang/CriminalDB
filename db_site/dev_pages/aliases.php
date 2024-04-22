@@ -15,6 +15,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 User::checkPerm();
 
 
+
 ?> 
 
 
@@ -118,7 +119,7 @@ User::checkPerm();
                             <td>$row[Criminal_ID]</td>
                             <td>$row[Alias]</td>
                             <td>
-                            <a class = 'btn btn-primary' href='../functions/aliases_update.php?id=$row[Alias_ID]'>Update</a>
+                            <a class = 'btn btn-primary' href='../functions/aliases_update.php?alias_id=$row[Alias_ID]'>Update</a>
                             <a class = 'btn btn-danger' href='../functions/aliases_delete.php?id=$row[Alias_ID]'>Delete</a>
                             </td>
                         </tr>

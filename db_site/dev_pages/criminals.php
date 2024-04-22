@@ -23,6 +23,8 @@ User::checkPolice();
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel = "stylesheet" href = "../styles/style.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <script src = "	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 	
 </head>
@@ -54,12 +56,13 @@ User::checkPolice();
 			<li><a href="../dev_pages/criminals.php" class="login">Return</a></li>
     	</ul>
 	 </nav>
-	<div id="Content">
+	<div id="table_content" class = "container my5">
 		<div class="table header">
-			<h1>Criminals</h1>
+			<h2>Criminals</h2>
+			<a class = "btn btn-primary" href="../functions/criminal_add.php" role = "button">Add</a>
 		</div>
 		<div class = "table holder">
-			<table class="full_table">
+			<table class="table">
 				<thead>
 					<tr>
 						<th>Criminal ID</th>
@@ -110,16 +113,19 @@ User::checkPolice();
                                     <td>".$rows["City"]."</td>
                                     <td>".$rows["State"]."</td>
                                     <td>".$rows["Zip"]."</td>
-                                    <td>".$rows["Phone"]."</td>
+                                    <td>".$rows["phone_number"]."</td>
                                     <td>".$rows["V_status"]."</td>
                                     <td>".$rows["P_status"]."</td>
+									<td>
+									<a class = 'btn btn-primary' href='../functions/criminal_update.php?criminal_id=$rows[Criminal_ID]'>Update</a>
+									<a class = 'btn btn-danger' href='../functions/criminal_delete.php?id=$rows[Criminal_ID]'>Delete</a>
+									</td>
+                                    
 								</tr>";
 							}
-						mysqli_query($conn, "UNLOCK TABLES");
-						}else{
-							mysqli_query($conn, "UNLOCK TABLES");
-							echo"<tr><td colspan = '3'>No results found</td></tr>";
+						
 						}
+					mysqli_query($conn, "UNLOCK TABLES");
 					$conn->close();
 					?>
 				</tbody>
