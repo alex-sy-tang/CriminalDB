@@ -43,9 +43,9 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         exit; 
     }
 
-    $alias_id = $row["alias_id"]; 
-    $criminal_id = $row["criminal_id"]; 
-    $alias = $row["alias"]; 
+    $alias_id = $row["Alias_ID"]; 
+    $criminal_id = $row["Criminal_ID"]; 
+    $alias = $row["Alias"]; 
 
 
 
@@ -128,12 +128,9 @@ else{
 
         <form method = "post">
            
-            <div class = "row mb-3">
-                    <label class = "col-sm-3 col-form-label" for = "">Alias ID</label>
-                    <div class = "col-sm-6">
-                        <input type = "text" class = "form-contorl" name = "alias_id" value = "<?php echo $alias_id; ?>">
-                    </div>
-                </div>
+           
+
+            <input type="hidden" name = "alias_id" value = "<?php echo $alias_id; ?>">    
 
             <input type="hidden" name = "criminal_id" value = "<?php echo $criminal_id; ?>">
 

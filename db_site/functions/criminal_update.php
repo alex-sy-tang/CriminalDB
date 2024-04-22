@@ -1,5 +1,17 @@
 <?php
-include_once "../connect.php"; 
+session_start();
+include "../connect.php";
+include '../user.php';
+
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+  // User is not logged in, redirect to login page
+  header('Location: ../login.html');
+  exit;
+}
+
+User::checkPerm();
+
 
 //$id = "";
 $criminal_id="";
@@ -22,30 +34,41 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         header("location: ../dev_pages/criminals.php");
         exit; 
     }
+    
+    $criminal_id = $_GET["criminal_id"];
+    
 
-    $id = $_GET["criminal_id"];
+    
+    
 
     //read the row of the selcted client from the database
-    $sql = "SELECT * FROM Criminals WHERE Criminal_ID = '$criminal_id' "; 
-    $result = $conn -> query($sql);
-    $row = $result -> fetch_assoc();
+    $sql = "SELECT * FROM Criminals WHERE Criminal_ID = ?"; 
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $criminal_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    // $sql = "SELECT * FROM Criminals WHERE Criminal_ID = $criminal_id "; 
+    // $result = $conn -> query($sql);
+    // $row = $result -> fetch_assoc();
     
     if(!$row){
-        header("location: ../dev_pages/criminals.php"); 
+        header("location: ../dev_pages/aliases.php"); 
         exit; 
     }
 
-    // $id = $row["id"];
-    $criminal_id = $row["criminal_id"]; 
-    $last_name= $row["last_name"];
-    $first_name=$row["first_name"];
-    $street=$row["street"];
-    $city=$row["city"];
-    $state_us=$row["state_us"];
-    $zip=$row["zip"];
+    
+    $criminal_id = $row["Criminal_ID"]; 
+    $last_name = $row["Last_name"];
+    $first_name = $row["First_name"];
+    $street = $row["Street"];
+    $city = $row["City"];
+    $state_us = $row["State_US"];
+    $zip = $row["Zip"];
     $phone_number=$row["phone_number"];
-    $v_status=$row["v_status"];
-    $p_status=$row["p_status"];
+    $v_status = $row["V_status"];
+    $p_status = $row["P_status"];
+
 
 }else{
     $criminal_id = $_POST["criminal_id"]; 
@@ -70,10 +93,10 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         // }
 
 
-/*        if(empty($last_name) || empty($first_name) || empty($street) || empty($city) || empty($state_us) || empty($zip) || empty($phone_number) || empty($v_status) || empty($p_status)){
-            $errorMessage = "All the fields are required";
-            break; 
-        }*/
+        //  if(empty($last_name) || empty($first_name) || empty($street) || empty($city) || empty($state_us) || empty($zip) || empty($phone_number) || empty($v_status) || empty($p_status)){
+        //      $errorMessage = "All the fields are required";
+        //      break; 
+        //  }
         if(!empty($last_name)){
             $sql = "UPDATE Criminals SET Last_name = '$last_name' WHERE Criminal_ID = $criminal_id"; 
         }
@@ -111,9 +134,17 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
          }
 
 
-/*        $sql = "UPDATE Criminals SET Criminal = '$criminal' WHERE Criminal_ID = $criminal_id";*/ 
+/*        $sql = "UPDATE Criminals SET Criminal = '$criminal' WHERE Criminal_ID = $criminal_id";*/
+        // $sql = "UPDATE Criminals SET Criminal_ID = ?, Last_name = ?, First_name = ?,  WHERE Alias_ID = ?";
+        // $stmt = $conn->prepare($sql);
+        // $stmt->bind_param("si", $alias, $alias_id);
+        // $result = $stmt->execute();
+        $sql = "UPDATE Criminals SET Last_name = ?, First_name = ?, Street = ?, City = ?, State_US = ?, Zip = ?, phone_number = ?, V_status = ?, P_status = ? WHERE Criminal_ID = ?"; 
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssssssssi", $last_name, $first_name, $street, $city, $state_us, $zip, $phone_number, $v_status, $p_status, $criminal_id);
+        $result = $stmt->execute(); 
 
-        $result = $conn -> query($sql); 
+        
 
         if(!$result){
             $errorMessage = "Invalid query: ". $conn -> error;
@@ -164,16 +195,6 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         ?>
 
         <form method = "post">
-            <input type="hidden" name = "criminal_id" value = "<?php echo $criminal_id; ?>">
-            <input type="hidden" name = "last_name" value = "<?php echo $last_name; ?>">
-            <input type="hidden" name = "first_name" value = "<?php echo $first_name; ?>">
-            <input type="hidden" name = "street" value = "<?php echo $street; ?>">
-            <input type="hidden" name = "city" value = "<?php echo $city; ?>">
-            <input type="hidden" name = "state_us" value = "<?php echo $state_us; ?>">
-            <input type="hidden" name = "zip" value = "<?php echo $zip; ?>">
-            <input type="hidden" name = "phone_number" value = "<?php echo $phone_number; ?>">
-            <input type="hidden" name = "v_status" value = "<?php echo $v_status; ?>">
-            <input type="hidden" name = "p_status" value = "<?php echo $p_status; ?>">
 
             <!-- <div class = "row mb-3">
                 <label class = "col-sm-3 col-form-label" for = "">Criminal ID</label>
@@ -181,12 +202,8 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                     <input type = "text" class = "form-contorl" name = "criminal_id" value = "">
                 </div>
             </div> -->
-            <div class = "row mb-3">
-                <label class = "col-sm-3 col-form-label" for = "">Criminal ID</label>
-                <div class = "col-sm-6">
-                    <input type = "text" class = "form-contorl" name = "criminal_id" value = "<?php echo $criminal_id; ?>">
-                </div>
-            </div>
+            <input type = "hidden" name = "criminal_id" value = "<?php echo $criminal_id; ?>">
+            
             <div class = "row mb-3">
                 <label class = "col-sm-3 col-form-label" for = "">Last Name</label>
                 <div class = "col-sm-6">
