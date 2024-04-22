@@ -1,5 +1,18 @@
 <?php
-    include_once "../connect.php";
+session_start();
+include "../connect.php";
+include '../user.php';
+
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+// User is not logged in, redirect to login page
+header('Location: ../login.html');
+exit;
+}
+
+User::checkPerm();
+User::checkPolice();
+
     if(isset($_GET["id"])){
          $criminal_id = $_GET["id"]; 
 
