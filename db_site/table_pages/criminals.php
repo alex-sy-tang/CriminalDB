@@ -26,6 +26,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     	<div class="logo">
       		<h1>CRIMINAL DATABASE</h1>
     	</div>
+
+		<div class="search-bar">
+      		<form action="../functions/user_criminal_totalcharge.php" method = "GET">
+        		<input type="text" name = "search_query" placeholder="Criminal Charge">
+				<button type = "submit">Search</button>
+      		</form>
+    	</div>
     
     	<div class="search-bar">
 			<form action="criminals.php" method = "GET">
